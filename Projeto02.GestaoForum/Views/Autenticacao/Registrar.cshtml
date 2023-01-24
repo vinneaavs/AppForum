@@ -1,0 +1,43 @@
+﻿@model Projeto02.GestaoForum.Models.UsuarioViewModel
+
+@{
+    ViewData["Title"] = "Registrar";
+}
+
+<h1>Registrar</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Registrar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Senha" class="control-label"></label>
+                <input asp-for="Senha" class="form-control" />
+                <span asp-validation-for="Senha" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ConfirmaSenha" class="control-label"></label>
+                <input asp-for="ConfirmaSenha" class="form-control" />
+                <span asp-validation-for="ConfirmaSenha" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="control-label">Role: </label>
+                <select asp-for="Perfil" class="form-select"
+                    asp-items="(SelectList)ViewBag.Roles">
+                    <option value="">Nenhum Selecionado</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <input type="submit" value="Incluir Usuário" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
