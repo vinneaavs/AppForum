@@ -1,14 +1,25 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Projeto02.GestaoForum.Models;
+using Projeto03.AcessoDados.DI;
 
 var builder = WebApplication.CreateBuilder(args);
 
 ConfigurationManager config = builder.Configuration;
 
 // Add services to the container.
-builder.Services.AddDbContext<ForumContext>(options =>
-    options.UseSqlServer(config.GetConnectionString("ForumConnection")));
+#region ALTERAÇÃO PARA PROJETO03 DLL
+//builder.Services.AddDbContext<ForumContext>(options =>
+//    options.UseSqlServer(config.GetConnectionString("ForumConnection")));
+#endregion
+
+#region INJEÇÃO DE DEPENDENCIA DLL PROJETO03
+//using Projeto03.AcessoDados.DI
+
+builder.Services.AddInfStructDB(config);
+
+#endregion
+
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(config.GetConnectionString("IdentityConnection")));
@@ -39,8 +50,13 @@ var app = builder.Build();
 var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 
-var context = services.GetRequiredService<ForumContext>();
-DbInitializer.Initialize(context);
+#region ALTERADO PARA PROJETO 03 INJEÇÃO DE DEPENDENCIA
+
+//var context = services.GetRequiredService<ForumContext>();
+//DbInitializer.Initialize(context);
+
+#endregion
+
 
 Utils.CreateRoles(services).Wait();
 

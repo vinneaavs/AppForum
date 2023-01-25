@@ -1,7 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Dapper.Contrib.Extensions;
+using System.ComponentModel.DataAnnotations;
 
 namespace Projeto03.AcessoDados.Models
 {
+    [Table("FORUM")]
+
     public class Forum
     {
         public int Id { get; set; }
